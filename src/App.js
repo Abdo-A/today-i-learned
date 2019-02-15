@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+
 import Main from './pages/Main/Main';
-import Navbar from './components/Navbar/Navbar';
+import Header from './components/Header/Header';
 
 class App extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Header />
         <Main />
       </>
     );

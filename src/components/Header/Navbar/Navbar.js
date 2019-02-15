@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { colors } from '../../assets/style/base';
+import { colors } from '../../../assets/style/base';
 
 const Navbar = (props) => {
   return (
