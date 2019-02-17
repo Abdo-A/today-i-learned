@@ -19,7 +19,7 @@ const Navbar = (props) => {
         data-toggle="collapse"
         data-target="#navigation"
       >
-        The Author
+        Author
       </button>
       <div className="collapse navbar-collapse" id="navigation">
         <nav className="navbar-nav" />
