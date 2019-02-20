@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const keys = require('../../config/keys');
+const keys = require('../../config/keys.ignore');
 
 const loginUser = (req, res) => {
   const email = req.body.email;
