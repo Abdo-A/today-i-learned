@@ -64,7 +64,7 @@ const NewDaily = (props) => {
             </label>
           </div>
 
-          <div className="d-flex justify-content-center">
+          <div className="text-center">
             <button onClick={onSubmit} className="btn btn-primary btn-lg">
               Submit
             </button>
