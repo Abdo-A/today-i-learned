@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import CreatableSelect from 'react-select/lib/Creatable';
 
 const DailyBody = ({ daily, history }) => {
   return (
@@ -30,6 +31,16 @@ const DailyBody = ({ daily, history }) => {
           <h1 className="display-4">{daily.private ? '🕶' : '👐'}</h1>
         </div>
         <p className="lead">{daily.body}</p>
+        <div className="mt-4 mb-4">
+          <CreatableSelect
+            isClearable
+            isMulti
+            isDisabled
+            noOptionsMessage={() => 'No more tags'}
+            placeholder="Select tags"
+            defaultValue={daily.tags.map((tag) => ({ label: tag, value: tag }))}
+          />
+        </div>
       </div>
     </div>
   );

@@ -31,6 +31,7 @@ const NewDaily = (props) => {
             <CreatableSelect
               isClearable
               isMulti
+              isDisabled
               noOptionsMessage={() => 'No more tags'}
               placeholder="Select tags"
               onChange={(choices) =>
