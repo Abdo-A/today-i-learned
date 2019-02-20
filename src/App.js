@@ -1,14 +1,21 @@
+import { Switch, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import Main from './pages/Main/Main';
+import Daily from './pages/Daily/Daily';
 import Header from './components/Header/Header';
+import Main from './pages/Main/Main';
+import NewDaily from './pages/NewDaily/NewDaily';
 
 class App extends Component {
   render() {
     return (
       <>
         <Header />
-        <Main />
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/daily/:date" component={Daily} />
+          <Route path="/new" component={NewDaily} />
+        </Switch>
       </>
     );
   }

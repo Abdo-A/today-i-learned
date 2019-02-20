@@ -7,11 +7,11 @@ import Daily from '../Daily/Daily';
 
 const MainPublic = (props) => {
   return (
-    <>
+    <div className="mb-5 pb-5">
       {dailySamples.map((daily) => (
         <DailyBody daily={daily} key={daily._id} />
       ))}
-    </>
+    </div>
   );
 };
 

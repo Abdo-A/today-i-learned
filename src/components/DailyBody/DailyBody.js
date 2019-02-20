@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
-const DailyBody = ({ daily }) => {
+const DailyBody = ({ daily, history }) => {
   return (
     <div className="jumbotron bg-light text-dark rounded-0 mb-0 pb-0">
       <div className="container">
         <div className="mb-4 d-flex flex-row justify-content-between">
           <div>
-            <h1 className="d-none d-md-block font-weight-bold text-left">
-              {daily.date.toDateString()}
-            </h1>
-            <h4 className="d-md-none font-weight-bold text-center text-center">
-              {daily.date.toDateString()}
-            </h4>
+            <div
+              style={{ cursor: 'pointer' }}
+              onClick={() => history.push('/daily/daily.date')}
+            >
+              <h1 className="d-none d-md-block font-weight-bold text-left">
+                {daily.date.toDateString()}
+              </h1>
+              <h4 className="d-md-none font-weight-bold text-center text-center">
+                {daily.date.toDateString()}
+              </h4>
+            </div>
             <small className="lead font-weight-bold">
               {daily.date.toLocaleString('en-US', {
                 hour: 'numeric',
@@ -31,4 +37,4 @@ const DailyBody = ({ daily }) => {
 
 DailyBody.propTypes = { daily: PropTypes.shape({}) };
 
-export default DailyBody;
+export default withRouter(DailyBody);

@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { colors } from '../../../assets/style/base';
+import { withRouter } from 'react-router-dom';
 
-const Navbar = (props) => {
+const Navbar = ({ history }) => {
   return (
     <nav
       className="navbar sticky-top navbar-dark "
       style={{ background: colors.main }}
     >
-      <div className="navbar-brand">
+      <div
+        className="navbar-brand"
+        onClick={() => history.push('/')}
+        style={{ cursor: 'pointer' }}
+      >
         <span role="img" aria-label="book">
           📚{' '}
         </span>
@@ -43,4 +48,4 @@ const Navbar = (props) => {
 
 Navbar.propTypes = {};
 
-export default Navbar;
+export default withRouter(Navbar);
