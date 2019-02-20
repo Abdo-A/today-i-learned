@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Daily from '../../components/Daily/Daily';
+
+import DailyBody from '../../components/DailyBody/DailyBody';
 import dailySamples from '../../assets/samples/dailySamples';
+import Daily from '../Daily/Daily';
 
 const MainPublic = (props) => {
   return (
     <>
       {dailySamples.map((daily) => (
-        <Daily daily={daily} key={daily._id} />
+        <DailyBody daily={daily} key={daily._id} />
       ))}
     </>
   );
