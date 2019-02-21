@@ -6,7 +6,7 @@ const router = express.Router();
 const dailyController = require('../controllers/dailyController/index.js');
 
 // @route  GET api/daily/all
-// @desc   User login - Return JWT token
+// @desc   Get all dailies
 // @access Private
 // @errors nodailies error
 router.get(
@@ -14,6 +14,12 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   dailyController.getAllDailies
 );
+
+// @route  GET api/daily/public
+// @desc   Get public dailies
+// @access Public
+// @errors nodailies error
+router.get('/public', dailyController.getPublicDailies);
 
 // @route  POST api/daily/new
 // @desc   Create new daily
@@ -26,13 +32,9 @@ router.post(
 );
 
 // @route  GET api/daily/:daily_id
-// @desc   Create new daily
-// @access Private
+// @desc   Get daily by id
+// @access Public
 // @errors nodaily
-router.get(
-  '/:daily_id',
-  passport.authenticate('jwt', { session: false }),
-  dailyController.getDailyById
-);
+router.get('/:daily_id', dailyController.getDailyById);
 
 module.exports = router;
