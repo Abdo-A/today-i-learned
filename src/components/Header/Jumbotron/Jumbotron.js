@@ -2,10 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-let x;
-
-console.log('hi');
-
 const Jumbotron = ({ history }) => {
   return (
     <div

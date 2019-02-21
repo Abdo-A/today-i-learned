@@ -5,7 +5,7 @@ const passport = require('passport');
 const app = express();
 
 // Models
-// require('./models/loadModels');
+require('./models/loadModels');
 
 // BodyParser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
