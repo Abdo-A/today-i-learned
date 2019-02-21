@@ -4,6 +4,18 @@ import { withRouter } from 'react-router-dom';
 import CreatableSelect from 'react-select/lib/Creatable';
 
 const DailyBody = ({ daily, history }) => {
+  const onClickStar = () => {
+    console.log('star');
+  };
+
+  const onClickUnstar = () => {
+    console.log('unstar');
+  };
+
+  const onClickComment = () => {
+    console.log('comment');
+  };
+
   return (
     <div className="jumbotron bg-light text-dark rounded-0 mb-0 pb-0">
       <div className="container">
@@ -31,6 +43,39 @@ const DailyBody = ({ daily, history }) => {
           <h1 className="display-4">{daily.private ? '🕶' : '👐'}</h1>
         </div>
         <p className="lead">{daily.body}</p>
+
+        <div className="h6 d-flex justify-content-around justify-content-sm-start">
+          <span
+            className="mr-sm-4"
+            style={{ cursor: 'pointer' }}
+            title="Star this Daily"
+            onClick={onClickStar}
+          >
+            {'☀️ '}
+            Star {daily.stars > 0 ? `(${daily.stars})` : ''}
+          </span>
+
+          <span
+            className="mr-sm-4"
+            style={{ cursor: 'pointer' }}
+            title="Unstar this Daily"
+            onClick={onClickUnstar}
+          >
+            {'⛅ '}
+            Unstar
+          </span>
+
+          <span
+            className="mr-sm-4"
+            style={{ cursor: 'pointer' }}
+            title="Comment on this daily"
+            onClick={onClickComment}
+          >
+            {'📋 '}
+            Comment
+          </span>
+        </div>
+
         <div className="mt-4 mb-4">
           <CreatableSelect
             isClearable
