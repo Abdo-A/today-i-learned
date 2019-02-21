@@ -12,7 +12,7 @@ const DailySchema = new Schema({
   tags: [{ type: String }],
   private: Boolean,
   stars: {
-    type: String,
+    type: Number,
     default: 0
   }
 });

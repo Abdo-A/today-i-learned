@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 
 // Routes
 app.use('/api/user', require('./routes/user'));
-// app.use('/api/daily', require('./routes/daily'));
+app.use('/api/daily', require('./routes/daily'));
 
 const port = process.env.PORT || 5000;
 
