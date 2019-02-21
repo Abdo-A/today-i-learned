@@ -5,6 +5,9 @@ const createDaily = require('./createDaily');
 const deleteDaily = require('./deleteDaily');
 const getDailyById = require('./getDailyById');
 const starDaily = require('./starDaily');
+const unstarDaily = require('./unstarDaily');
+const addCommentToDaily = require('./addCommentToDaily');
+const removeCommentFromDaily = require('./removeCommentFromDaily');
 
 module.exports = {
   getAllDailies,
@@ -13,5 +16,8 @@ module.exports = {
   createDaily,
   deleteDaily,
   getDailyById,
-  starDaily
+  starDaily,
+  unstarDaily,
+  addCommentToDaily,
+  removeCommentFromDaily
 };

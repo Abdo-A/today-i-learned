@@ -71,4 +71,30 @@ module.exports = router;
 // @errors nodaily error
 router.post('/star/:daily_id', dailyController.starDaily);
 
+// @route  POST api/daily/unstar/:daily_id
+// @desc   Remove a star from a daily
+// @access Private
+// @errors nodaily error
+router.post(
+  '/unstar/:daily_id',
+  passport.authenticate('jwt', { session: false }),
+  dailyController.unstarDaily
+);
+
+// @route  POST api/daily/comment/:daily_id
+// @desc   Add comment to a daily
+// @access Public
+// @errors nodaily error
+router.post('/comment/:daily_id', dailyController.addCommentToDaily);
+
+// @route  DELETE api/daily/uncomment/:comment_id/:daily_id
+// @desc   Remove comment from an daily
+// @access Public
+// @errors nodaily nocomment error
+router.delete(
+  '/uncomment/:comment_id/:daily_id',
+  dailyController.removeCommentFromDaily
+);
+
 module.exports = router;
+// http://localhost:5000/api/daily/uncomment/5c6f1268feaaac2b3c2bfd55/5c6e7c890394bd3b90fec3f7

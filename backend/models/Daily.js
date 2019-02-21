@@ -14,7 +14,13 @@ const DailySchema = new Schema({
   stars: {
     type: Number,
     default: 0
-  }
+  },
+  comments: [
+    {
+      email: String,
+      body: String
+    }
+  ]
 });
 
 module.exports = mongoose.model('daily', DailySchema);
