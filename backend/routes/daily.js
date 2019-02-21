@@ -31,6 +31,16 @@ router.post(
   dailyController.createDaily
 );
 
+// @route  DELETE api/daily/delete/:daily_id
+// @desc   Delete daily
+// @access Private
+// @errors nodaily error
+router.delete(
+  '/delete/:daily_id',
+  passport.authenticate('jwt', { session: false }),
+  dailyController.deleteDaily
+);
+
 // @route  GET api/daily/:daily_id
 // @desc   Get daily by id
 // @access Public
