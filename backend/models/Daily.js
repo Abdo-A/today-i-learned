@@ -18,7 +18,11 @@ const DailySchema = new Schema({
   comments: [
     {
       email: String,
-      body: String
+      body: String,
+      date: {
+        type: Date,
+        default: Date.now
+      }
     }
   ]
 });

@@ -89,12 +89,12 @@ router.post('/comment/:daily_id', dailyController.addCommentToDaily);
 
 // @route  DELETE api/daily/uncomment/:comment_id/:daily_id
 // @desc   Remove comment from an daily
-// @access Public
+// @access Private
 // @errors nodaily nocomment error
 router.delete(
   '/uncomment/:comment_id/:daily_id',
+  passport.authenticate('jwt', { session: false }),
   dailyController.removeCommentFromDaily
 );
 
 module.exports = router;
-// http://localhost:5000/api/daily/uncomment/5c6f1268feaaac2b3c2bfd55/5c6e7c890394bd3b90fec3f7
