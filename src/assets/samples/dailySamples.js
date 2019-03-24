@@ -20,6 +20,10 @@ const dailySamples = [
         _id: 'iodujgbqn9'
       }
     ],
+    imageUrls: [
+      'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      'https://www.gettyimages.co.uk/gi-resources/images/Embed/new/embed2.jpg'
+    ],
     _id: 'e3rfed3'
   },
   {
@@ -42,6 +46,10 @@ const dailySamples = [
         date: new Date(),
         _id: 'ioduj8uqn9'
       }
+    ],
+    imageUrls: [
+      'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      'https://www.gettyimages.co.uk/gi-resources/images/Embed/new/embed2.jpg'
     ],
     _id: 'im309'
   }

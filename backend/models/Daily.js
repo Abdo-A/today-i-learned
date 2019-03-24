@@ -15,6 +15,7 @@ const DailySchema = new Schema({
     type: Number,
     default: 0
   },
+  imageUrls: [{ type: String }],
   comments: [
     {
       email: String,

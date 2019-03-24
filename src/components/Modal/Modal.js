@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ trigger, body, onConfirm, modalId }) => {
+const Modal = ({ trigger, body, onConfirm, modalId, confirmButtonText }) => {
   return (
     <div>
       <div data-toggle="modal" data-target={`#${modalId}`}>
@@ -44,7 +44,7 @@ const Modal = ({ trigger, body, onConfirm, modalId }) => {
                 data-dismiss="modal"
                 onClick={onConfirm}
               >
-                Save
+                {confirmButtonText}
               </button>
             </div>
           </div>
@@ -52,6 +52,10 @@ const Modal = ({ trigger, body, onConfirm, modalId }) => {
       </div>
     </div>
   );
+};
+
+Modal.defaultProps = {
+  confirmButtonText: 'Yes'
 };
 
 export default Modal;

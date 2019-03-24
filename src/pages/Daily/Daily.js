@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
+import React, { useState } from 'react';
 
 import DailyBody from '../../components/DailyBody/DailyBody';
 import dailySamples from '../../assets/samples/dailySamples';

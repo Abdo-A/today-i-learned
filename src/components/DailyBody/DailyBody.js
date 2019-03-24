@@ -44,6 +44,15 @@ const DailyBody = ({ daily, history }) => {
         </div>
         <p className="lead">{daily.body}</p>
 
+        {daily.imageUrls.map((url) => (
+          <img
+            key={url}
+            src={url}
+            alt="Daily"
+            className="rounded img-thumbnail mx-auto d-block w-75 mt-4 mb-4"
+          />
+        ))}
+
         <div className="h6 d-flex justify-content-around justify-content-sm-start">
           <span
             className="mr-sm-4"

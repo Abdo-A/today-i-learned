@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-
 import CreatableSelect from 'react-select/lib/Creatable';
+import React, { useState } from 'react';
+import ReactFilestack from 'filestack-react';
+
+import keys from '../../RNkeys.ignore';
 
 const NewDaily = (props) => {
   const [newDaily, setNewDaily] = useState({
     date: new Date(),
     body: '',
     tags: [],
-    private: false
+    private: false,
+    imageUrls: []
   });
 
   const onChangeInput = (name, value) => {
@@ -17,6 +19,25 @@ const NewDaily = (props) => {
 
   const onSubmit = () => {
     console.log(newDaily);
+  };
+
+  const onImageUpload = (result) => {
+    console.log(result.filesUploaded[0].url);
+
+    const newImageUrls = [...newDaily.imageUrls];
+
+    newImageUrls.push(result.filesUploaded[0].url);
+
+    setNewDaily({ ...newDaily, imageUrls: newImageUrls });
+
+    // Only a lame trick:
+    this.setState({
+      url: result.filesUploaded[0].url
+    });
+  };
+
+  const onError = (error) => {
+    if (newDaily.imageUrls.length === 0) alert('Error uploading photo', error);
   };
 
   return (
@@ -31,9 +52,8 @@ const NewDaily = (props) => {
             <CreatableSelect
               isClearable
               isMulti
-              isDisabled
               noOptionsMessage={() => 'No more tags'}
-              placeholder="Select tags"
+              placeholder="Set tags"
               onChange={(choices) =>
                 onChangeInput('tags', choices.map((choice) => choice.value))
               }
@@ -49,6 +69,25 @@ const NewDaily = (props) => {
               placeholder="What did you learn today, Abdo?"
               rows="20"
               className="form-control"
+            />
+          </div>
+
+          {newDaily.imageUrls.map((url) => (
+            <img
+              key={url}
+              src={url}
+              alt="Daily"
+              className="rounded img-thumbnail mx-auto d-block w-75 mt-4 mb-4"
+            />
+          ))}
+
+          <div className="text-center">
+            <ReactFilestack
+              apikey={keys.filestackKey}
+              buttonText="Upload a photo"
+              buttonClass="ui medium button gray"
+              onSuccess={onImageUpload}
+              onError={onError}
             />
           </div>
 
