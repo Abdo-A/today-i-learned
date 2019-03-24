@@ -29,15 +29,10 @@ const NewDaily = (props) => {
     newImageUrls.push(result.filesUploaded[0].url);
 
     setNewDaily({ ...newDaily, imageUrls: newImageUrls });
-
-    // Only a lame trick:
-    this.setState({
-      url: result.filesUploaded[0].url
-    });
   };
 
   const onError = (error) => {
-    if (newDaily.imageUrls.length === 0) alert('Error uploading photo', error);
+    alert('Error uploading photo', error);
   };
 
   return (
@@ -83,7 +78,7 @@ const NewDaily = (props) => {
 
           <div className="text-center">
             <ReactFilestack
-              apikey={keys.filestackKey}
+              apikey={keys.filestackKey[Math.round(Math.random())]}
               buttonText="Upload a photo"
               buttonClass="ui medium button gray"
               onSuccess={onImageUpload}
