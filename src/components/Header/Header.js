@@ -1,8 +1,15 @@
-import React from 'react';
-import Navbar from './Navbar/Navbar';
-import Jumbotron from './Jumbotron/Jumbotron';
+import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
 
-const Header = () => {
+import * as AuthActions from '../../store/actions/authActions';
+import Jumbotron from './Jumbotron/Jumbotron';
+import Navbar from './Navbar/Navbar';
+
+const Header = ({ checkSavedUserThenLogin }) => {
+  useEffect(() => {
+    checkSavedUserThenLogin();
+  }, []);
+
   return (
     <>
       <Jumbotron />
@@ -11,4 +18,11 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapDispatchToProps = {
+  checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Header);

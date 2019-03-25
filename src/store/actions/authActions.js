@@ -21,9 +21,7 @@ export const loginUser = (userData, callback) => (dispatch) => {
       const { token } = res.data;
 
       // Save token to storage
-      localStorage.setItem(storedJWTname, token).catch(() => {
-        alert('Could not save your credentials');
-      });
+      localStorage.setItem(storedJWTname, token);
 
       // Set Authorization header
       setAuthToken(token);
@@ -56,9 +54,7 @@ export const logoutUser = () => (dispatch) => {
   });
 
   // Remove token from storage
-  localStorage.removeItem(storedJWTname).catch(() => {
-    alert('Could not remove your saved credentials');
-  });
+  localStorage.removeItem(storedJWTname);
 
   // Remove Authorization header
   removeAuthToken();
@@ -70,26 +66,26 @@ export const logoutUser = () => (dispatch) => {
 };
 
 export const checkSavedUserThenLogin = (callback) => (dispatch) => {
-  localStorage.getItem(storedJWTname).then((token) => {
-    if (token) {
-      // Set Authorization header
-      setAuthToken(token);
+  const token = localStorage.getItem(storedJWTname);
 
-      // Decode token to get user data
-      const decodedToken = jwtDecode(token);
+  if (token) {
+    // Set Authorization header
+    setAuthToken(token);
 
-      // Check for expired token
-      const currentTime = Date.now() / 1000;
-      if (decodedToken.exp && decodedToken.exp < currentTime) {
-        dispatch(logoutUser());
-      } else {
-        // Set user
-        dispatch({
-          type: actionTypes.SET_USER,
-          payload: decodedToken
-        });
-        if (callback) callback();
-      }
+    // Decode token to get user data
+    const decodedToken = jwtDecode(token);
+
+    // Check for expired token
+    const currentTime = Date.now() / 1000;
+    if (decodedToken.exp && decodedToken.exp < currentTime) {
+      dispatch(logoutUser());
+    } else {
+      // Set user
+      dispatch({
+        type: actionTypes.SET_USER,
+        payload: decodedToken
+      });
+      if (callback) callback();
     }
-  });
+  }
 };
