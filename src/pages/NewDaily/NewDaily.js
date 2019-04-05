@@ -1,6 +1,9 @@
+import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/lib/Creatable';
 import React, { useState } from 'react';
 import ReactFilestack from 'filestack-react';
+
+import * as DailyActions from '../../store/actions/dailyActions';
 
 import keys from '../../RNkeys.ignore';
 
@@ -18,7 +21,8 @@ const NewDaily = (props) => {
   };
 
   const onSubmit = () => {
-    console.log(newDaily);
+    const { createDaily } = props;
+    createDaily(newDaily);
   };
 
   const onImageUpload = (result) => {
@@ -111,4 +115,12 @@ const NewDaily = (props) => {
 
 NewDaily.propTypes = {};
 
-export default NewDaily;
+const mapDispatchToProps = {
+  createDaily: DailyActions.createDaily
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewDaily);
+

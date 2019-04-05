@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const express = require('express');
 const passport = require('passport');
 
@@ -11,6 +12,9 @@ require('./models/loadModels');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// CORS Middleware
+app.use(cors());
+
 // DB Connect
 require('./config/dbconnect');
 
@@ -19,7 +23,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 // Cross Origin Problem
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',

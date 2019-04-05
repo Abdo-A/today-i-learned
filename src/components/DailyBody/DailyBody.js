@@ -16,6 +16,10 @@ const DailyBody = ({ daily, history }) => {
     console.log('comment');
   };
 
+  if (typeof daily.date == 'string') {
+    daily.date = new Date(daily.date)
+  }
+
   return (
     <div className="jumbotron bg-light text-dark rounded-0 mb-0 pb-0">
       <div className="container">
@@ -23,7 +27,7 @@ const DailyBody = ({ daily, history }) => {
           <div>
             <div
               style={{ cursor: 'pointer' }}
-              onClick={() => history.push('/daily/daily.date')}
+              onClick={() => history.push(`/daily/${daily._id}`)}
             >
               <h1 className="d-none d-md-block font-weight-bold text-left">
                 {daily.date.toDateString()}
