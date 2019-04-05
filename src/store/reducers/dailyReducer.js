@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_ALL_DAILIES_END:
       return {
         ...state,
-        allDailies: action.payload ? action.payload : state.allDailies,
+        allDailies: action.payload ? action.payload : [],
         isLoading: false
       };
 
@@ -43,7 +43,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_PUBLIC_DAILIES_END:
       return {
         ...state,
-        publicDailies: action.payload ? action.payload : state.publicDailies,
+        publicDailies: action.payload ? action.payload : [],
         isLoading: false
       };
 
@@ -57,7 +57,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_DAILY_BY_ID_END:
       return {
         ...state,
-        selectedDaily: action.payload ? action.payload : state.selectedDaily,
+        selectedDaily: action.payload ? action.payload : {},
         isLoading: false
       };
 

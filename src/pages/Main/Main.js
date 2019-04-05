@@ -7,15 +7,6 @@ import DailyBody from '../../components/DailyBody/DailyBody';
 const MainPublic = (props) => {
 
   useEffect(() => {
-    const { getAllDailies, getPublicDailies, isAuthenticated } = props;
-    if (isAuthenticated) {
-      getAllDailies();
-    } else {
-      getPublicDailies();
-    }
-  }, [])
-
-  useEffect(() => {
     const { getAllDailies, getPublicDailies } = props;
     if (props.isAuthenticated) {
       getAllDailies();
