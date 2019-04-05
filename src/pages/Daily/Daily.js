@@ -42,6 +42,8 @@ const Daily = (props) => {
     return null;
   }
 
+  const { isAuthenticated } = props;
+
   return (
     <div className="mb-5">
       <DailyBody daily={daily} />
@@ -98,28 +100,34 @@ const Daily = (props) => {
               </div>
               <hr />
               <p className="text-dark lead">{comment.body}</p>
-              <div className="text-right" style={{ cursor: 'pointer' }}>
-                <Modal
-                  body="Are you sure you want to delete this comment?"
-                  trigger={'❌'}
-                  onConfirm={onDeleteComment}
-                  modalId="deleteDailyCommentModal"
-                />
-              </div>
+              {isAuthenticated &&
+                <div className="text-right" style={{ cursor: 'pointer' }}>
+                  <Modal
+                    body="Are you sure you want to delete this comment?"
+                    trigger={'❌'}
+                    onConfirm={onDeleteComment}
+                    modalId="deleteDailyCommentModal"
+                  />
+                </div>
+              }
+
             </div>
           )
         })}
 
-        <div className="text-right">
-          <Modal
-            body="Are you sure you want to delete this daily?"
-            trigger={
-              <button className="btn btn-danger btn-sm">Delete Daily</button>
-            }
-            onConfirm={onDeleteDaily}
-            modalId="deleteDailyModal"
-          />
-        </div>
+        {isAuthenticated &&
+          <div className="text-right">
+            <Modal
+              body="Are you sure you want to delete this daily?"
+              trigger={
+                <button className="btn btn-danger btn-sm">Delete Daily</button>
+              }
+              onConfirm={onDeleteDaily}
+              modalId="deleteDailyModal"
+            />
+          </div>
+        }
+
       </div>
     </div>
   );
@@ -129,6 +137,7 @@ Daily.propTypes = {};
 
 const mapStateToProps = (state) => ({
   selectedDaily: state.daily.selectedDaily,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 const mapDispatchToProps = {

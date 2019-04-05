@@ -7,14 +7,14 @@ import * as AuthActions from '../../store/actions/authActions';
 import Jumbotron from './Jumbotron/Jumbotron';
 import Navbar from './Navbar/Navbar';
 
-const Header = ({ checkSavedUserThenLogin, isLoading }) => {
+const Header = ({ checkSavedUserThenLogin, isLoading, isAuthenticated }) => {
   useEffect(() => {
     checkSavedUserThenLogin();
   }, []);
 
   return (
     <>
-      <Jumbotron />
+      <Jumbotron isAuthenticated={isAuthenticated} />
       <Navbar />
 
       {isLoading &&
@@ -33,7 +33,8 @@ const Header = ({ checkSavedUserThenLogin, isLoading }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.auth.isLoading || state.daily.isLoading
+  isLoading: state.auth.isLoading || state.daily.isLoading,
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 const mapDispatchToProps = {

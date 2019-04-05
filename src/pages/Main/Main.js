@@ -7,6 +7,15 @@ import DailyBody from '../../components/DailyBody/DailyBody';
 const MainPublic = (props) => {
 
   useEffect(() => {
+    const { getAllDailies, getPublicDailies, isAuthenticated } = props;
+    if (isAuthenticated) {
+      getAllDailies();
+    } else {
+      getPublicDailies();
+    }
+  }, [])
+
+  useEffect(() => {
     const { getAllDailies, getPublicDailies } = props;
     if (props.isAuthenticated) {
       getAllDailies();
@@ -24,6 +33,9 @@ const MainPublic = (props) => {
     shownDailies = props.publicDailies;
   }
 
+  if (shownDailies.length === 0) {
+    return <p className="display-4 text-center mt-5">No Dailies Yet</p>
+  }
 
   return (
     <div className="mb-5 pb-5">

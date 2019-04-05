@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-const Jumbotron = ({ history }) => {
+const Jumbotron = ({ history, isAuthenticated }) => {
   return (
     <div
       className="jumbotron m-0 text-light rounded-0 d-flex justify-content-between align-items-center"
@@ -15,11 +15,15 @@ const Jumbotron = ({ history }) => {
           I love you, Abdo
         </h2>
       </div>
-      <div>
-        <h4 onClick={() => history.push('/new')} style={{ cursor: 'pointer' }}>
-          {'✍️'}
-        </h4>
-      </div>
+      {
+        isAuthenticated &&
+        <div>
+          <h4 onClick={() => history.push('/new')} style={{ cursor: 'pointer' }}>
+            {'✍️'}
+          </h4>
+        </div>
+      }
+
     </div>
   );
 };

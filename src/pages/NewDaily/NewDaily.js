@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/lib/Creatable';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactFilestack from 'filestack-react';
 
 import * as DailyActions from '../../store/actions/dailyActions';
@@ -15,6 +15,16 @@ const NewDaily = (props) => {
     private: false,
     imageUrls: []
   });
+
+  useEffect(() => {
+    const { getAllDailies, getPublicDailies, isAuthenticated } = props;
+
+    if (isAuthenticated) {
+      getAllDailies();
+    } else {
+      getPublicDailies();
+    }
+  }, [props.isAuthenticated])
 
   const onChangeInput = (name, value) => {
     setNewDaily({ ...newDaily, [name]: value });
@@ -42,6 +52,21 @@ const NewDaily = (props) => {
     alert('Error uploading photo', error);
   };
 
+  const getTagsOptions = () => {
+    const { allDailies, publicDailies } = props;
+    const dalies = allDailies.length === 0 ? publicDailies : allDailies;
+
+    const tagOptions = [];
+
+    dalies.forEach(daily => {
+      daily.tags.forEach((tag) => {
+        tagOptions.push({ label: tag, value: tag })
+      })
+    })
+
+    return tagOptions;
+  }
+
   return (
     <div>
       <div className="container mt-5 mb-5">
@@ -60,7 +85,7 @@ const NewDaily = (props) => {
                 onChangeInput('tags', choices.map((choice) => choice.value))
               }
               defaultValue={[]}
-              options={[{ label: 3, value: 3 }, { label: 4, value: 4 }]}
+              options={getTagsOptions()}
             />
           </div>
 
@@ -118,12 +143,22 @@ const NewDaily = (props) => {
 
 NewDaily.propTypes = {};
 
+const mapStateToProps = (state) => ({
+  allDailies: state.daily.allDailies,
+  publicDailies: state.daily.publicDailies,
+
+  isAuthenticated: state.auth.isAuthenticated
+});
+
 const mapDispatchToProps = {
-  createDaily: DailyActions.createDaily
+  createDaily: DailyActions.createDaily,
+
+  getAllDailies: DailyActions.getAllDailies,
+  getPublicDailies: DailyActions.getPublicDailies,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewDaily);
 
