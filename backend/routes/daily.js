@@ -63,8 +63,6 @@ router.delete(
 // @errors nodaily
 router.get('/:daily_id', dailyController.getDailyById);
 
-module.exports = router;
-
 // @route  POST api/daily/star/:daily_id
 // @desc   Add a star to a daily
 // @access Public

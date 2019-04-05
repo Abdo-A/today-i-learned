@@ -13,7 +13,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route path="/" exact component={Main} />
-          <Route path="/daily/:date" component={Daily} />
+          <Route path="/daily/:daily_id" component={Daily} />
           <Route path="/new" component={NewDaily} />
         </Switch>
       </>

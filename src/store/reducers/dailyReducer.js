@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const INITIAL_STATE = {
   allDailies: [],
   publicDailies: [],
+  selectedDaily: {},
   isLoading: false
 };
 
@@ -43,6 +44,20 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         publicDailies: action.payload ? action.payload : state.publicDailies,
+        isLoading: false
+      };
+
+
+    case actionTypes.GET_DAILY_BY_ID_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+
+    case actionTypes.GET_DAILY_BY_ID_END:
+      return {
+        ...state,
+        selectedDaily: action.payload ? action.payload : state.selectedDaily,
         isLoading: false
       };
 

@@ -77,3 +77,29 @@ export const getPublicDailies = callback => (dispatch) => {
       });
     });
 };
+
+
+export const getDailyById = (id, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_DAILY_BY_ID_START,
+  });
+
+  http
+    .get(`${dailyAPI}/${id}`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.GET_DAILY_BY_ID_END,
+        payload: res.data,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.GET_DAILY_BY_ID_END,
+      });
+    });
+};

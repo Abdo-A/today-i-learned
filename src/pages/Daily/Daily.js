@@ -1,15 +1,22 @@
+import { connect } from 'react-redux';
 import isEmail from 'validator/lib/isEmail';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+import * as DailyActions from '../../store/actions/dailyActions';
 import DailyBody from '../../components/DailyBody/DailyBody';
-import dailySamples from '../../assets/samples/dailySamples';
 import Modal from '../../components/Modal/Modal';
 
-const Daily = () => {
+const Daily = (props) => {
   const [comment, setComment] = useState({
     email: '',
     body: ''
   });
+
+  useEffect(() => {
+    const { getDailyById } = props;
+    getDailyById(props.match.params.daily_id);
+  }, [])
+
 
   const onDeleteDaily = () => {
     console.log('delete daily');
@@ -23,7 +30,12 @@ const Daily = () => {
     console.log(comment);
   };
 
-  const daily = dailySamples[0];
+  const daily = props.selectedDaily;
+  console.log(props.selectedDaily);
+
+  if (Object.keys(props.selectedDaily).length === 0) {
+    return null;
+  }
 
   return (
     <div className="mb-5">
@@ -67,9 +79,9 @@ const Daily = () => {
             <div className="d-flex flex-column flex-md-row justify-content-between">
               <h4 className="alert-heading text-dark">{comment.email}</h4>
               <div className="d-flex text-dark">
-                <small className="mr-3">{daily.date.toDateString()}</small>
+                <small className="mr-3">{comment.date.toDateString()}</small>
                 <small>
-                  {daily.date.toLocaleString('en-US', {
+                  {comment.date.toLocaleString('en-US', {
                     hour: 'numeric',
                     minute: 'numeric',
                     hour12: true
@@ -107,4 +119,15 @@ const Daily = () => {
 
 Daily.propTypes = {};
 
-export default Daily;
+const mapStateToProps = (state) => ({
+  selectedDaily: state.daily.selectedDaily,
+});
+
+const mapDispatchToProps = {
+  getDailyById: DailyActions.getDailyById,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Daily);
