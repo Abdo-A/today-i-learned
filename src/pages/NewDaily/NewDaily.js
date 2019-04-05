@@ -21,13 +21,16 @@ const NewDaily = (props) => {
   };
 
   const onSubmit = () => {
-    const { createDaily } = props;
-    createDaily(newDaily);
+    const { createDaily, history } = props;
+
+    const callback = () => {
+      history.push('/');
+    }
+
+    createDaily(newDaily, callback);
   };
 
   const onImageUpload = (result) => {
-    console.log(result.filesUploaded[0].url);
-
     const newImageUrls = [...newDaily.imageUrls];
 
     newImageUrls.push(result.filesUploaded[0].url);

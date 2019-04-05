@@ -103,3 +103,29 @@ export const getDailyById = (id, callback) => (dispatch) => {
       });
     });
 };
+
+
+export const deleteDaily = (id, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.DELETE_DAILY_START,
+  });
+
+  http
+    .delete(`${dailyAPI}/delete/${id}`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.DELETE_DAILY_END,
+        payload: res.data,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.DELETE_DAILY_END,
+      });
+    });
+}

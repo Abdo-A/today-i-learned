@@ -19,7 +19,13 @@ const Daily = (props) => {
 
 
   const onDeleteDaily = () => {
-    console.log('delete daily');
+    const { deleteDaily, history } = props;
+
+    const callback = () => {
+      history.push('/');
+    }
+
+    deleteDaily(props.match.params.daily_id, callback);
   };
 
   const onDeleteComment = () => {
@@ -31,7 +37,6 @@ const Daily = (props) => {
   };
 
   const daily = props.selectedDaily;
-  console.log(props.selectedDaily);
 
   if (Object.keys(props.selectedDaily).length === 0) {
     return null;
@@ -74,33 +79,36 @@ const Daily = (props) => {
           </div>
         </div>
 
-        {daily.comments.map((comment) => (
-          <div className="alert alert-info mt-5" role="alert" key={comment._id}>
-            <div className="d-flex flex-column flex-md-row justify-content-between">
-              <h4 className="alert-heading text-dark">{comment.email}</h4>
-              <div className="d-flex text-dark">
-                <small className="mr-3">{comment.date.toDateString()}</small>
-                <small>
-                  {comment.date.toLocaleString('en-US', {
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true
-                  })}
-                </small>
+        {daily.comments.map((comment) => {
+          comment.date = new Date(comment.date);
+          return (
+            <div className="alert alert-info mt-5" role="alert" key={comment._id}>
+              <div className="d-flex flex-column flex-md-row justify-content-between">
+                <h4 className="alert-heading text-dark">{comment.email}</h4>
+                <div className="d-flex text-dark">
+                  <small className="mr-3">{comment.date.toDateString()}</small>
+                  <small>
+                    {comment.date.toLocaleString('en-US', {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: true
+                    })}
+                  </small>
+                </div>
+              </div>
+              <hr />
+              <p className="text-dark lead">{comment.body}</p>
+              <div className="text-right" style={{ cursor: 'pointer' }}>
+                <Modal
+                  body="Are you sure you want to delete this comment?"
+                  trigger={'❌'}
+                  onConfirm={onDeleteComment}
+                  modalId="deleteDailyCommentModal"
+                />
               </div>
             </div>
-            <hr />
-            <p className="text-dark lead">{comment.body}</p>
-            <div className="text-right" style={{ cursor: 'pointer' }}>
-              <Modal
-                body="Are you sure you want to delete this comment?"
-                trigger={'❌'}
-                onConfirm={onDeleteComment}
-                modalId="deleteDailyCommentModal"
-              />
-            </div>
-          </div>
-        ))}
+          )
+        })}
 
         <div className="text-right">
           <Modal
@@ -125,6 +133,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getDailyById: DailyActions.getDailyById,
+  deleteDaily: DailyActions.deleteDaily
 };
 
 export default connect(
