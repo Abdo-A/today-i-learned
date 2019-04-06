@@ -57,6 +57,16 @@ const DailyBody = ({ daily, history }) => {
           />
         ))}
 
+        <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+          {
+            daily.tags.map((tag) => (
+              <label class="btn btn-secondary active" style={{ cursor: 'pointer' }} key={tag}>
+                <input type="radio" name={tag} id={tag} /> {tag}
+              </label>
+            ))
+          }
+        </div>
+
         <div className="h6 d-flex justify-content-around justify-content-sm-start">
           <span
             className="mr-sm-4"
@@ -89,16 +99,6 @@ const DailyBody = ({ daily, history }) => {
           </span>
         </div>
 
-        <div className="mt-4 mb-4">
-          <CreatableSelect
-            isClearable
-            isMulti
-            isDisabled
-            noOptionsMessage={() => 'No more tags'}
-            placeholder="Select tags"
-            defaultValue={daily.tags.map((tag) => ({ label: tag, value: tag }))}
-          />
-        </div>
       </div>
     </div>
   );
