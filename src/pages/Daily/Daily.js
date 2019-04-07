@@ -56,6 +56,21 @@ const Daily = (props) => {
     return null;
   }
 
+
+
+  const getEmailView = (email) => {
+    const { isAuthenticated } = props;
+
+    let emailView = email;
+    if (email.includes('@')) {
+      if (!isAuthenticated) {
+        const signIndex = email.indexOf('@');
+        emailView = email.slice(0, signIndex);
+      }
+    }
+    return emailView;
+  }
+
   const { isAuthenticated } = props;
 
   return (
@@ -102,7 +117,7 @@ const Daily = (props) => {
           return (
             <div className="alert alert-info mt-5" role="alert" key={comment._id}>
               <div className="d-flex flex-column flex-md-row justify-content-between">
-                <h4 className="alert-heading text-dark">{comment.email}</h4>
+                <h4 className="alert-heading text-dark">{getEmailView(comment.email)}</h4>
                 <div className="d-flex text-dark">
                   <small className="mr-3">{comment.date.toDateString()}</small>
                   <small>
