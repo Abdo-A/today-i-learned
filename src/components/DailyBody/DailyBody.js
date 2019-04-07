@@ -12,7 +12,7 @@ const DailyBody = ({ daily, history }) => {
   };
 
   const onClickComment = () => {
-    console.log('comment');
+    history.push(`/daily/${daily._id}`)
   };
 
   if (typeof daily.date == 'string') {
