@@ -13,19 +13,19 @@ const Daily = (props) => {
   });
 
   useEffect(() => {
-    const { getDailyById } = props;
-    getDailyById(props.match.params.daily_id);
+    const { getDailyById, match } = props;
+    getDailyById(match.params.daily_id);
   }, [])
 
 
   const onDeleteDaily = () => {
-    const { deleteDaily, history } = props;
+    const { deleteDaily, history, match } = props;
 
     const callback = () => {
       history.push('/');
     }
 
-    deleteDaily(props.match.params.daily_id, callback);
+    deleteDaily(match.params.daily_id, callback);
   };
 
   const onDeleteComment = () => {
@@ -33,7 +33,15 @@ const Daily = (props) => {
   };
 
   const onAddComment = () => {
-    console.log(comment);
+    const { addCommentToDaily, getDailyById, match } = props;
+
+    const callback = () => {
+      getDailyById(match.params.daily_id);
+      setComment({ email: '', body: '' });
+    }
+
+    addCommentToDaily(match.params.daily_id, comment, callback);
+
   };
 
   const daily = props.selectedDaily;
@@ -59,6 +67,7 @@ const Daily = (props) => {
               onChange={(e) =>
                 setComment({ ...comment, email: e.target.value })
               }
+              value={comment.email}
             />
           </div>
           <div className="form-group">
@@ -68,6 +77,7 @@ const Daily = (props) => {
               className="form-control"
               placeholder="Text"
               onChange={(e) => setComment({ ...comment, body: e.target.value })}
+              value={comment.body}
             />
           </div>
           <div className="text-right">
@@ -142,7 +152,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getDailyById: DailyActions.getDailyById,
-  deleteDaily: DailyActions.deleteDaily
+  deleteDaily: DailyActions.deleteDaily,
+  addCommentToDaily: DailyActions.addCommentToDaily,
 };
 
 export default connect(

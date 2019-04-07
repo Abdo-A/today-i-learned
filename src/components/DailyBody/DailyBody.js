@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import CreatableSelect from 'react-select/lib/Creatable';
 
 const DailyBody = ({ daily, history }) => {
   const onClickStar = () => {
@@ -57,10 +56,10 @@ const DailyBody = ({ daily, history }) => {
           />
         ))}
 
-        <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+        <div className="btn-group btn-group-toggle mb-3" data-toggle="buttons">
           {
             daily.tags.map((tag) => (
-              <label class="btn btn-secondary active" style={{ cursor: 'pointer' }} key={tag}>
+              <label className="btn btn-secondary active" style={{ cursor: 'pointer' }} key={tag}>
                 <input type="radio" name={tag} id={tag} /> {tag}
               </label>
             ))

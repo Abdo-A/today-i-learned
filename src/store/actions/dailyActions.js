@@ -129,3 +129,27 @@ export const deleteDaily = (id, callback) => (dispatch) => {
       });
     });
 }
+
+
+export const addCommentToDaily = (dailyId, commentData, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.ADD_DAILY_COMMENT_START,
+  });
+  http
+    .post(`${dailyAPI}/comment/${dailyId}`, commentData)
+    .then(() => {
+      if (callback) callback();
+      dispatch({
+        type: actionTypes.DELETE_DAILY_COMMENT_END,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.DELETE_DAILY_COMMENT_END,
+      });
+    });
+};
