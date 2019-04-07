@@ -79,6 +79,19 @@ export default (state = INITIAL_STATE, action) => {
         isLoading: true
       };
 
+    case actionTypes.ADD_DAILY_COMMENT_END:
+      return {
+        ...state,
+        isLoading: false
+      };
+
+
+    case actionTypes.DELETE_DAILY_COMMENT_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+
     case actionTypes.DELETE_DAILY_COMMENT_END:
       return {
         ...state,

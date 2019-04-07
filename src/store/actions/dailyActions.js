@@ -140,8 +140,34 @@ export const addCommentToDaily = (dailyId, commentData, callback) => (dispatch) 
     .then(() => {
       if (callback) callback();
       dispatch({
-        type: actionTypes.DELETE_DAILY_COMMENT_END,
+        type: actionTypes.ADD_DAILY_COMMENT_END,
       });
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.ADD_DAILY_COMMENT_END,
+      });
+    });
+};
+
+
+export const deleteCommentFromDaily = (commentId, dailyId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.DELETE_DAILY_COMMENT_START,
+  });
+
+  http
+    .delete(`${dailyAPI}/uncomment/${commentId}/${dailyId}`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.DELETE_DAILY_COMMENT_END,
+        payload: res.data,
+      });
+      if (callback) callback();
     })
     .catch((err) => {
       dispatch({
@@ -152,4 +178,4 @@ export const addCommentToDaily = (dailyId, commentData, callback) => (dispatch) 
         type: actionTypes.DELETE_DAILY_COMMENT_END,
       });
     });
-};
+}

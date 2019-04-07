@@ -28,8 +28,14 @@ const Daily = (props) => {
     deleteDaily(match.params.daily_id, callback);
   };
 
-  const onDeleteComment = () => {
-    console.log('delete comment');
+  const onDeleteComment = (commentId) => {
+    const { deleteCommentFromDaily, getDailyById, match } = props;
+
+    const callback = () => {
+      getDailyById(match.params.daily_id);
+    }
+
+    deleteCommentFromDaily(commentId, match.params.daily_id, callback);
   };
 
   const onAddComment = () => {
@@ -115,8 +121,8 @@ const Daily = (props) => {
                   <Modal
                     body="Are you sure you want to delete this comment?"
                     trigger={'❌'}
-                    onConfirm={onDeleteComment}
-                    modalId="deleteDailyCommentModal"
+                    onConfirm={() => onDeleteComment(comment._id)}
+                    modalId={`deleteDailyCommentModal${comment._id}`}
                   />
                 </div>
               }
@@ -154,6 +160,7 @@ const mapDispatchToProps = {
   getDailyById: DailyActions.getDailyById,
   deleteDaily: DailyActions.deleteDaily,
   addCommentToDaily: DailyActions.addCommentToDaily,
+  deleteCommentFromDaily: DailyActions.deleteCommentFromDaily
 };
 
 export default connect(
