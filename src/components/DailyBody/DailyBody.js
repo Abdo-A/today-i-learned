@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 
 const DailyBody = ({ daily, history, onStarDaily }) => {
   const [stars, setStars] = useState(0);
@@ -11,6 +11,10 @@ const DailyBody = ({ daily, history, onStarDaily }) => {
 
   const onClickComment = () => {
     history.push(`/daily/${daily._id}`);
+  };
+
+  const onClickTag = (tag) => {
+    history.push(`/tag/${tag}`);
   };
 
   const onClickStar = () => {
@@ -67,6 +71,7 @@ const DailyBody = ({ daily, history, onStarDaily }) => {
               className="btn btn-secondary active"
               style={{ cursor: 'pointer' }}
               key={tag}
+              onClick={() => onClickTag(tag)}
             >
               <input type="radio" name={tag} id={tag} /> {tag}
             </label>

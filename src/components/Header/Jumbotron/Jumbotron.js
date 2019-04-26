@@ -9,10 +9,10 @@ const Jumbotron = ({ history, isAuthenticated }) => {
     >
       <div>
         <h1 className="display-2 d-none d-md-inline" style={styles.heading}>
-          I love you, Abdo
+          {isAuthenticated ? 'I love you, Abdo' : 'Abdo learned...'}
         </h1>
         <h2 className="d-inline d-md-none" style={styles.heading}>
-          I love you, Abdo
+          {isAuthenticated ? 'I love you, Abdo' : 'Abdo learned...'}
         </h2>
       </div>
       {isAuthenticated && (

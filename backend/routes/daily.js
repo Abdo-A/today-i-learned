@@ -15,6 +15,12 @@ router.get(
   dailyController.getAllDailies
 );
 
+// @route  GET api/daily/public
+// @desc   Get public dailies
+// @access Public
+// @errors nodailies error
+router.get('/public', dailyController.getPublicDailies);
+
 // @route  GET api/daily/all/tag/:tag
 // @desc   Get all dailies by tag
 // @access Private
@@ -25,17 +31,11 @@ router.get(
   dailyController.getAllDailiesByTag
 );
 
-// @route  GET api/daily/public
-// @desc   Get public dailies
-// @access Public
-// @errors nodailies error
-router.get('/public', dailyController.getPublicDailies);
-
 // @route  GET api/daily/public/tag/:tag
 // @desc   Get public dailies by tag
 // @access Public
 // @errors nodailies error
-router.get('/public/tag/:tag', dailyController.getAllDailiesByTag);
+router.get('/public/tag/:tag', dailyController.getPublicDailiesByTag);
 
 // @route  POST api/daily/new
 // @desc   Create new daily

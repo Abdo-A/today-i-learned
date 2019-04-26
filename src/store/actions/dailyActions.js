@@ -73,6 +73,54 @@ export const getPublicDailies = (callback) => (dispatch) => {
     });
 };
 
+export const getAllDailiesByTag = (tag, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_ALL_DAILIES_BY_TAG_START
+  });
+  http
+    .get(`${dailyAPI}/all/tag/${tag}`)
+    .then((res) => {
+      if (callback) callback();
+      dispatch({
+        type: actionTypes.GET_ALL_DAILIES_BY_TAG_END,
+        payload: res.data
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data
+      });
+      dispatch({
+        type: actionTypes.GET_ALL_DAILIES_BY_TAG_END
+      });
+    });
+};
+
+export const getPublicDailiesByTag = (tag, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_PUBLIC_DAILIES_BY_TAG_START
+  });
+  http
+    .get(`${dailyAPI}/public/tag/${tag}`)
+    .then((res) => {
+      if (callback) callback();
+      dispatch({
+        type: actionTypes.GET_PUBLIC_DAILIES_BY_TAG_END,
+        payload: res.data
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data
+      });
+      dispatch({
+        type: actionTypes.GET_PUBLIC_DAILIES_BY_TAG_END
+      });
+    });
+};
+
 export const getDailyById = (id, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.GET_DAILY_BY_ID_START

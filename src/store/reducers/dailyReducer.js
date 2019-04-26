@@ -3,6 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const INITIAL_STATE = {
   allDailies: [],
   publicDailies: [],
+  allDailiesByTag: [],
+  publicDailiesByTag: [],
   selectedDaily: {},
   isLoading: false
 };
@@ -34,6 +36,19 @@ export default (state = INITIAL_STATE, action) => {
         isLoading: false
       };
 
+    case actionTypes.GET_ALL_DAILIES_BY_TAG_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+
+    case actionTypes.GET_ALL_DAILIES_BY_TAG_END:
+      return {
+        ...state,
+        allDailiesByTag: action.payload ? action.payload : [],
+        isLoading: false
+      };
+
     case actionTypes.GET_PUBLIC_DAILIES_START:
       return {
         ...state,
@@ -44,6 +59,19 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         publicDailies: action.payload ? action.payload : [],
+        isLoading: false
+      };
+
+    case actionTypes.GET_PUBLIC_DAILIES_BY_TAG_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+
+    case actionTypes.GET_PUBLIC_DAILIES_BY_TAG_END:
+      return {
+        ...state,
+        publicDailiesByTag: action.payload ? action.payload : [],
         isLoading: false
       };
 

@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import React, { useEffect } from 'react';
 
 import * as DailyActions from '../../store/actions/dailyActions';
-import DailyBody from '../../components/DailyBody/DailyBody';
+import DailiesList from '../../components/DailiesList';
 
-const MainPublic = (props) => {
+const MainPage = (props) => {
   useEffect(() => {
     getDailies();
   }, [props.isAuthenticated]);
@@ -19,40 +19,18 @@ const MainPublic = (props) => {
     }
   };
 
-  const onStar = (dailyId) => {
-    const { starDaily } = props;
-
-    starDaily(dailyId);
-  };
-
-  let shownDailies = [];
+  let dailies = [];
 
   if (props.isAuthenticated) {
-    shownDailies = props.allDailies;
+    dailies = props.allDailies;
   } else {
-    shownDailies = props.publicDailies;
+    dailies = props.publicDailies;
   }
 
-  if (shownDailies.length === 0) {
-    return <p className="display-4 text-center mt-5">No Dailies Yet</p>;
-  }
-
-  return (
-    <div className="mb-5 pb-5">
-      {shownDailies.map((daily) => (
-        <DailyBody
-          daily={daily}
-          key={daily._id}
-          onStarDaily={() => {
-            onStar(daily._id);
-          }}
-        />
-      ))}
-    </div>
-  );
+  return <DailiesList dailies={dailies} />;
 };
 
-MainPublic.propTypes = {};
+MainPage.propTypes = {};
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
@@ -62,12 +40,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getAllDailies: DailyActions.getAllDailies,
-  getPublicDailies: DailyActions.getPublicDailies,
-
-  starDaily: DailyActions.starDaily
+  getPublicDailies: DailyActions.getPublicDailies
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainPublic);
+)(MainPage);

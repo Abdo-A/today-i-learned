@@ -82,7 +82,7 @@ const NewDaily = (props) => {
             <CreatableSelect
               isClearable
               isMulti
-              noOptionsMessage={() => 'No more tags'}
+              noOptionsMessage={() => 'No tags'}
               placeholder="Set tags"
               onChange={(choices) =>
                 onChangeInput(
