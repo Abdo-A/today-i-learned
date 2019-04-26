@@ -12,7 +12,8 @@ module.exports = (req, res) => {
         errors.nodaily = 'No such daily';
         res.status(404).json(errors);
       }
-      daily.remove().then(() => res.json({ success: true }));
+      daily.hidden = true;
+      daily.save().then(() => res.json({ success: true }));
     })
     .catch((err) => {
       errors.nodaily = 'No such daily';

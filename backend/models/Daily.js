@@ -11,6 +11,10 @@ const DailySchema = new Schema({
   body: String,
   tags: [{ type: String }],
   private: Boolean,
+  hidden: {
+    type: Boolean,
+    default: false
+  },
   stars: {
     type: Number,
     default: 0

@@ -7,7 +7,7 @@ module.exports = (req, res) => {
   const errors = {};
   Daily.findById(req.params.daily_id)
     .then((daily) => {
-      if (!daily) {
+      if (!daily || daily.hidden) {
         errors.nodaily = 'No such daily';
         res.status(404).json(errors);
       }

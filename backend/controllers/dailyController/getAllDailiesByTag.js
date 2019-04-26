@@ -5,7 +5,7 @@ const Daily = mongoose.model('daily');
 
 module.exports = (req, res) => {
   const errors = {};
-  Daily.find()
+  Daily.find({ hidden: false })
     .sort({ date: -1 })
     .then((dailies) => {
       if (dailies.length === 0) {

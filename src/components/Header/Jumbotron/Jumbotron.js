@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 const Jumbotron = ({ history, isAuthenticated }) => {
-  console.log(window.innerWidth);
   return (
     <div
       className="jumbotron m-0 text-light rounded-0 d-flex justify-content-between align-items-center"
