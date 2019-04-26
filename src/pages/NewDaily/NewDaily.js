@@ -91,17 +91,21 @@ const NewDaily = (props) => {
                 )
               }
               defaultValue={[]}
+              backspaceRemovesValue={false}
               options={getTagsOptions()}
             />
           </div>
 
           <div className="form-group">
             <textarea
-              onChange={(e) => onChangeInput('body', e.target.value)}
+              onChange={(e) => {
+                onChangeInput('body', e.target.value);
+              }}
               id="textarea"
               placeholder="What did you learn today, Abdo?"
               rows="20"
               className="form-control"
+              style={{ whiteSpace: 'pre-wrap' }}
             />
           </div>
 

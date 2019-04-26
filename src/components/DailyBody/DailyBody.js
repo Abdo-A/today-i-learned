@@ -12,11 +12,11 @@ const DailyBody = ({ daily, history }) => {
   };
 
   const onClickComment = () => {
-    history.push(`/daily/${daily._id}`)
+    history.push(`/daily/${daily._id}`);
   };
 
   if (typeof daily.date == 'string') {
-    daily.date = new Date(daily.date)
+    daily.date = new Date(daily.date);
   }
 
   return (
@@ -45,7 +45,9 @@ const DailyBody = ({ daily, history }) => {
           </div>
           <h1 className="display-4">{daily.private ? '🕶' : '👐'}</h1>
         </div>
-        <p className="lead">{daily.body}</p>
+        <p className="lead" style={{ whiteSpace: 'pre-line' }}>
+          {daily.body}
+        </p>
 
         {daily.imageUrls.map((url) => (
           <img
@@ -57,13 +59,15 @@ const DailyBody = ({ daily, history }) => {
         ))}
 
         <div className="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-          {
-            daily.tags.map((tag) => (
-              <label className="btn btn-secondary active" style={{ cursor: 'pointer' }} key={tag}>
-                <input type="radio" name={tag} id={tag} /> {tag}
-              </label>
-            ))
-          }
+          {daily.tags.map((tag) => (
+            <label
+              className="btn btn-secondary active"
+              style={{ cursor: 'pointer' }}
+              key={tag}
+            >
+              <input type="radio" name={tag} id={tag} /> {tag}
+            </label>
+          ))}
         </div>
 
         <div className="h6 d-flex justify-content-around justify-content-sm-start">
@@ -97,7 +101,6 @@ const DailyBody = ({ daily, history }) => {
             Comment
           </span>
         </div>
-
       </div>
     </div>
   );
