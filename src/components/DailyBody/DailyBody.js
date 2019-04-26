@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 const DailyBody = ({ daily, history, onStarDaily }) => {
+  const [stars, setStars] = useState(0);
+
+  useEffect(() => {
+    setStars(daily.stars);
+  }, [daily]);
+
   const onClickComment = () => {
     history.push(`/daily/${daily._id}`);
+  };
+
+  const onClickStar = () => {
+    setStars(stars + 1);
+    onStarDaily();
   };
 
   if (typeof daily.date == 'string') {
@@ -67,10 +78,10 @@ const DailyBody = ({ daily, history, onStarDaily }) => {
             className="mr-sm-4"
             style={{ cursor: 'pointer' }}
             title="Star this Daily"
-            onClick={onStarDaily}
+            onClick={onClickStar}
           >
             {'☀️ '}
-            Star {daily.stars > 0 ? `(${daily.stars})` : ''}
+            Star {stars > 0 ? `(${stars})` : ''}
           </span>
 
           <span

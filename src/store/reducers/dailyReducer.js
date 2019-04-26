@@ -96,18 +96,6 @@ export default (state = INITIAL_STATE, action) => {
         isLoading: false
       };
 
-    case actionTypes.STAR_DAILY_START:
-      return {
-        ...state,
-        isLoading: true
-      };
-
-    case actionTypes.STAR_DAILY_END:
-      return {
-        ...state,
-        isLoading: false
-      };
-
     default:
       return state;
   }

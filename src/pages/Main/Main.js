@@ -22,11 +22,7 @@ const MainPublic = (props) => {
   const onStar = (dailyId) => {
     const { starDaily } = props;
 
-    const callback = () => {
-      getDailies();
-    };
-
-    starDaily(dailyId, callback);
+    starDaily(dailyId);
   };
 
   let shownDailies = [];
