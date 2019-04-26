@@ -2,15 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-const DailyBody = ({ daily, history }) => {
-  const onClickStar = () => {
-    console.log('star');
-  };
-
-  const onClickUnstar = () => {
-    console.log('unstar');
-  };
-
+const DailyBody = ({ daily, history, onStarDaily }) => {
   const onClickComment = () => {
     history.push(`/daily/${daily._id}`);
   };
@@ -20,7 +12,7 @@ const DailyBody = ({ daily, history }) => {
   }
 
   return (
-    <div className="jumbotron bg-light text-dark rounded-0 mb-0 pb-0">
+    <div className="jumbotron bg-light text-dark rounded-0">
       <div className="container">
         <div className="mb-4 d-flex flex-row justify-content-between">
           <div>
@@ -75,20 +67,10 @@ const DailyBody = ({ daily, history }) => {
             className="mr-sm-4"
             style={{ cursor: 'pointer' }}
             title="Star this Daily"
-            onClick={onClickStar}
+            onClick={onStarDaily}
           >
             {'☀️ '}
             Star {daily.stars > 0 ? `(${daily.stars})` : ''}
-          </span>
-
-          <span
-            className="mr-sm-4"
-            style={{ cursor: 'pointer' }}
-            title="Unstar this Daily"
-            onClick={onClickUnstar}
-          >
-            {'⛅ '}
-            Unstar
           </span>
 
           <span

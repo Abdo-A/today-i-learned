@@ -15,15 +15,14 @@ const Daily = (props) => {
   useEffect(() => {
     const { getDailyById, match } = props;
     getDailyById(match.params.daily_id);
-  }, [])
-
+  }, []);
 
   const onDeleteDaily = () => {
     const { deleteDaily, history, match } = props;
 
     const callback = () => {
       history.push('/');
-    }
+    };
 
     deleteDaily(match.params.daily_id, callback);
   };
@@ -33,7 +32,7 @@ const Daily = (props) => {
 
     const callback = () => {
       getDailyById(match.params.daily_id);
-    }
+    };
 
     deleteCommentFromDaily(commentId, match.params.daily_id, callback);
   };
@@ -44,10 +43,19 @@ const Daily = (props) => {
     const callback = () => {
       getDailyById(match.params.daily_id);
       setComment({ email: '', body: '' });
-    }
+    };
 
     addCommentToDaily(match.params.daily_id, comment, callback);
+  };
 
+  const onStar = () => {
+    const { starDaily, getDailyById, match } = props;
+
+    const callback = () => {
+      getDailyById(match.params.daily_id);
+    };
+
+    starDaily(match.params.daily_id, callback);
   };
 
   const daily = props.selectedDaily;
@@ -55,8 +63,6 @@ const Daily = (props) => {
   if (Object.keys(props.selectedDaily).length === 0) {
     return null;
   }
-
-
 
   const getEmailView = (email) => {
     const { isAuthenticated } = props;
@@ -69,13 +75,13 @@ const Daily = (props) => {
       }
     }
     return emailView;
-  }
+  };
 
   const { isAuthenticated } = props;
 
   return (
     <div className="mb-5">
-      <DailyBody daily={daily} />
+      <DailyBody daily={daily} onStarDaily={onStar} />
       <div className="container">
         <div className="jumbotron mt-4 p-3">
           <div className="h4 lead mb-4">Add a Comment</div>
@@ -115,9 +121,15 @@ const Daily = (props) => {
         {daily.comments.map((comment) => {
           comment.date = new Date(comment.date);
           return (
-            <div className="alert alert-info mt-5" role="alert" key={comment._id}>
+            <div
+              className="alert alert-info mt-5"
+              role="alert"
+              key={comment._id}
+            >
               <div className="d-flex flex-column flex-md-row justify-content-between">
-                <h4 className="alert-heading text-dark">{getEmailView(comment.email)}</h4>
+                <h4 className="alert-heading text-dark">
+                  {getEmailView(comment.email)}
+                </h4>
                 <div className="d-flex text-dark">
                   <small className="mr-3">{comment.date.toDateString()}</small>
                   <small>
@@ -130,8 +142,10 @@ const Daily = (props) => {
                 </div>
               </div>
               <hr />
-              <p className="text-dark lead">{comment.body}</p>
-              {isAuthenticated &&
+              <p className="text-dark lead" style={{ whiteSpace: 'pre-line' }}>
+                {comment.body}
+              </p>
+              {isAuthenticated && (
                 <div className="text-right" style={{ cursor: 'pointer' }}>
                   <Modal
                     body="Are you sure you want to delete this comment?"
@@ -140,13 +154,12 @@ const Daily = (props) => {
                     modalId={`deleteDailyCommentModal${comment._id}`}
                   />
                 </div>
-              }
-
+              )}
             </div>
-          )
+          );
         })}
 
-        {isAuthenticated &&
+        {isAuthenticated && (
           <div className="text-right">
             <Modal
               body="Are you sure you want to delete this daily?"
@@ -157,8 +170,7 @@ const Daily = (props) => {
               modalId="deleteDailyModal"
             />
           </div>
-        }
-
+        )}
       </div>
     </div>
   );
@@ -168,14 +180,16 @@ Daily.propTypes = {};
 
 const mapStateToProps = (state) => ({
   selectedDaily: state.daily.selectedDaily,
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = {
   getDailyById: DailyActions.getDailyById,
   deleteDaily: DailyActions.deleteDaily,
+
   addCommentToDaily: DailyActions.addCommentToDaily,
-  deleteCommentFromDaily: DailyActions.deleteCommentFromDaily
+  deleteCommentFromDaily: DailyActions.deleteCommentFromDaily,
+  starDaily: DailyActions.starDaily
 };
 
 export default connect(
