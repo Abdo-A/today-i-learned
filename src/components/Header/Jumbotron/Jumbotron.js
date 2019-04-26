@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 const Jumbotron = ({ history, isAuthenticated }) => {
+  console.log(window.innerWidth);
   return (
     <div
       className="jumbotron m-0 text-light rounded-0 d-flex justify-content-between align-items-center"
@@ -15,24 +16,28 @@ const Jumbotron = ({ history, isAuthenticated }) => {
           I love you, Abdo
         </h2>
       </div>
-      {
-        isAuthenticated &&
+      {isAuthenticated && (
         <div>
-          <h4 onClick={() => history.push('/new')} style={{ cursor: 'pointer' }}>
+          <h4
+            onClick={() => history.push('/new')}
+            style={{ cursor: 'pointer' }}
+          >
             {'✍️'}
           </h4>
         </div>
-      }
-
+      )}
     </div>
   );
 };
 
 const styles = {
   container: {
-    backgroundImage: "url('https://source.unsplash.com/700x300/?happy')",
+    backgroundImage: `url('https://source.unsplash.com/${
+      window.innerWidth
+    }x400/?happy')`,
     backgroundPosition: 'center',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    height: 400
   },
   heading: {
     background: 'rgba(37, 45, 62, 0.59)'

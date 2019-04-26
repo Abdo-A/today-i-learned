@@ -49,13 +49,9 @@ const Daily = (props) => {
   };
 
   const onStar = () => {
-    const { starDaily, getDailyById, match } = props;
+    const { starDaily, match } = props;
 
-    const callback = () => {
-      getDailyById(match.params.daily_id);
-    };
-
-    starDaily(match.params.daily_id, callback);
+    starDaily(match.params.daily_id);
   };
 
   const daily = props.selectedDaily;
