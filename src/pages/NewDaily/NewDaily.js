@@ -24,7 +24,7 @@ const NewDaily = (props) => {
     } else {
       getPublicDailies();
     }
-  }, [props.isAuthenticated])
+  }, [props.isAuthenticated]);
 
   const onChangeInput = (name, value) => {
     setNewDaily({ ...newDaily, [name]: value });
@@ -35,7 +35,7 @@ const NewDaily = (props) => {
 
     const callback = () => {
       history.push('/');
-    }
+    };
 
     createDaily(newDaily, callback);
   };
@@ -57,15 +57,18 @@ const NewDaily = (props) => {
     const dalies = allDailies.length === 0 ? publicDailies : allDailies;
 
     const tagOptions = [];
+    let allDailiesTags = [];
+    dalies.forEach((daily) => {
+      allDailiesTags.push(...daily.tags.map((tag) => tag.toLowerCase()));
+    });
+    allDailiesTags = [...new Set(allDailiesTags)];
 
-    dalies.forEach(daily => {
-      daily.tags.forEach((tag) => {
-        tagOptions.push({ label: tag, value: tag })
-      })
-    })
+    allDailiesTags.forEach((tag) => {
+      tagOptions.push({ label: tag, value: tag });
+    });
 
     return tagOptions;
-  }
+  };
 
   return (
     <div>
@@ -82,7 +85,10 @@ const NewDaily = (props) => {
               noOptionsMessage={() => 'No more tags'}
               placeholder="Set tags"
               onChange={(choices) =>
-                onChangeInput('tags', choices.map((choice) => choice.value))
+                onChangeInput(
+                  'tags',
+                  choices.map((choice) => choice.value.toLowerCase())
+                )
               }
               defaultValue={[]}
               options={getTagsOptions()}
@@ -154,11 +160,10 @@ const mapDispatchToProps = {
   createDaily: DailyActions.createDaily,
 
   getAllDailies: DailyActions.getAllDailies,
-  getPublicDailies: DailyActions.getPublicDailies,
+  getPublicDailies: DailyActions.getPublicDailies
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(NewDaily);
-
