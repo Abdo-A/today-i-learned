@@ -5,7 +5,7 @@ import ReactFilestack from 'filestack-react';
 
 import * as DailyActions from '../../store/actions/dailyActions';
 
-import keys from '../../RNkeys.ignore';
+import keys from '../../RNkeys';
 
 const NewDaily = (props) => {
   const [newDaily, setNewDaily] = useState({
